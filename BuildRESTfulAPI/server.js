@@ -37,7 +37,7 @@ app.get('/', function(req, res){
 
 
 //Get an instance of the express router
-var apiRouter = exress.Router();
+var apiRouter = express.Router();
 
 //test route to make sure everthing is working
 //accessed at GET http://localhost:8080/api
@@ -55,3 +55,6 @@ app.use('/api', apiRouter);
 //========================================
 app.listen(port);
 console.log('Magic happens on port '+ port);
+
+//connect to our database (hosted by mongolab)
+mongoose.connect('mongodb://letrungkien0210:kecodonforever0210@ds049181.mlab.com:49181/meanmachine');
