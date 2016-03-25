@@ -28,16 +28,18 @@ app.use(morgan('dev'));
 
 //ROUTES FOR OUR API
 //---------------------------------------
+var apiRouter = express.Router();//get an instance of the express Router
 
-
-//basic route for the home page
-app.get('/', function(req, res){
-	res.send('Welcome to the home page!');
+//middleware to use for all requests
+apiRouter.use(function(req, res, next){
+	//do logging
+	console.log('Somebody just came to our app!!!');
+	
+	//We'll add more to the middleware in Chapter 10
+	//This is where we will authenticate users
+	
+	next();//make sure we go to the next routes and don't stop here
 });
-
-
-//Get an instance of the express router
-var apiRouter = express.Router();
 
 //test route to make sure everthing is working
 //accessed at GET http://localhost:8080/api
@@ -46,6 +48,11 @@ apiRouter.get('/', function(req, res){
 });
 
 //more routes for our API will happen here
+
+//basic route for the home page
+app.get('/', function(req, res){
+	res.send('Welcome to the home page!');
+});
 
 //REGISTER OUR ROUTES --------------------
 //all of our routes will be prefixed with api
