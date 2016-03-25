@@ -58,3 +58,5 @@ console.log('Magic happens on port '+ port);
 
 //connect to our database (hosted by mongolab)
 mongoose.connect('mongodb://letrungkien0210:kecodonforever0210@ds049181.mlab.com:49181/meanmachine');
+
+var user = require('./app/models/user');
