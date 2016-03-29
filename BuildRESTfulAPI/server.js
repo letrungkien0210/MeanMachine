@@ -82,7 +82,19 @@ apiRouter.route('/users')
 			res.json(users);
 		});	
 	});
-	
+// on routes that end in /users/:user_id
+//-----------------------------------------------
+apiRouter.route('/users/:user_id')
+	//get the user with id
+	//(accessed at GET http://localhost:8080/api/users/:user_id)
+	.get(function(req, res){
+		User.findById(req.params.user_id, function(err, user){
+			if(err) res.send(err);
+			
+			//return that user
+			res.json(user);
+		});
+	});
 	
 
 //basic route for the home page
