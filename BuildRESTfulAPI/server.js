@@ -113,6 +113,16 @@ apiRouter.route('/users/:user_id')
 				res.json({message:'User updated!'});
 			});
 		})
+	})
+	//delete user with id
+	//(accessed at DELETE http://localhost:8080/api/:user_id)
+	.delete(function(req, res){
+		User.remove({
+			_id: req.params.user_id;
+		}, function(err){
+			if(err) res.send(err);
+			res.json({message: 'User deleted!'});
+		});
 	});
 	
 
