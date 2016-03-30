@@ -10,6 +10,8 @@ var mongoose	= require('mongoose');//for working w/ our database
 var port		= process.env.PORT || 8080;//set the port for out app
 console.log('Server s port is '+ port);
 
+var User = require('./app/models/user');
+
 //APP CONFIGURATION ---------------------
 //use body parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -118,7 +120,7 @@ apiRouter.route('/users/:user_id')
 	//(accessed at DELETE http://localhost:8080/api/:user_id)
 	.delete(function(req, res){
 		User.remove({
-			_id: req.params.user_id;
+			_id: req.params.user_id
 		}, function(err){
 			if(err) res.send(err);
 			res.json({message: 'User deleted!'});
@@ -143,4 +145,4 @@ console.log('Magic happens on port '+ port);
 //connect to our database (hosted by mongolab)
 mongoose.connect('mongodb://letrungkien0210:kecodonforever0210@ds049181.mlab.com:49181/meanmachine');
 
-var user = require('./app/models/user');
+
