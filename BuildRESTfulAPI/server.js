@@ -10,6 +10,9 @@ var mongoose	= require('mongoose');//for working w/ our database
 var port		= process.env.PORT || 8080;//set the port for out app
 console.log('Server s port is '+ port);
 
+//connect to our database (hosted by mongolab)
+mongoose.connect('mongodb://meanmachine:changeit@ds049181.mlab.com:49181/meanmachine');
+
 var User = require('./app/models/user');
 
 //APP CONFIGURATION ---------------------
@@ -111,8 +114,10 @@ apiRouter.route('/users/:user_id')
 			
 			//save the user
 			user.save(function(err){
-				if(err) res.send(err);
-				res.json({message:'User updated!'});
+				if(err)
+					res.send(err);
+				else
+					res.json({message:'User updated!'});
 			});
 		})
 	})
@@ -142,7 +147,6 @@ app.use('/api', apiRouter);
 app.listen(port);
 console.log('Magic happens on port '+ port);
 
-//connect to our database (hosted by mongolab)
-mongoose.connect('mongodb://letrungkien0210:kecodonforever0210@ds049181.mlab.com:49181/meanmachine');
+
 
 
