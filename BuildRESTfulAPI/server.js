@@ -7,8 +7,10 @@ var app			= express();//define our app using express
 var bodyParser	= require('body-parser');//get body-parser
 var morgan		= require('morgan');//used to see requests
 var mongoose	= require('mongoose');//for working w/ our database
+var jwt			= require('jsonwebtoken');
 var port		= process.env.PORT || 8080;//set the port for out app
 console.log('Server s port is '+ port);
+var superSecret = 'ilovescotchscotchyscotchscotch';
 
 //connect to our database (hosted by mongolab)
 mongoose.connect('mongodb://meanmachine:changeit@ds049181.mlab.com:49181/meanmachine');
@@ -34,6 +36,30 @@ app.use(morgan('dev'));
 //ROUTES FOR OUR API
 //---------------------------------------
 var apiRouter = express.Router();//get an instance of the express Router
+
+//route for authenticating users
+//route to authenticate a user (POST http://localhost:8080/api/authenticate)
+apiRouter.post('/authenticate', function(req, res){
+	//find the user
+	//select the name username and password explicitly
+	User.findOne({
+		username: req.body.username
+	}).select('name username password').exec(function(err, user){
+		if(err) throw err;
+		
+		//no user with that username was found
+		if(!user){
+			res.json({
+				success: false,
+				message: 'Authentication failed. User not found'
+			});
+		}else if (user){
+			//check if password matched
+			var validPassword = user.comparePassword(req.body.password);
+			
+		}
+	});
+});
 
 //middleware to use for all requests
 apiRouter.use(function(req, res, next){
