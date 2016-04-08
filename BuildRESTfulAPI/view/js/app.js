@@ -15,4 +15,19 @@ angular.module('firstApp',[])
       {name: 'Yora 2 Pro', color: 'Gray', nerdness: 6},
       {name: 'Chromebook', color: 'Black', nerdness: 5},
     ];
+    
+    //information that come from our form
+    vm.computerData={};
+    
+    vn.addComputer = function(){
+      //add a computer to the list
+      vm.computers.push({
+        name: vm.computerData.name,
+        color: vm.computerData.color,
+        nerdness: vm.computerData.nerdnress
+      });
+    };
+    
+    //after our computer has been added, clear the form
+    vm.computerData = {};
   });
