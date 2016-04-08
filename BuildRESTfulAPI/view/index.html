@@ -19,6 +19,11 @@
   <!-- declare our angular application and angular controller -->
   <body class="container" ng-app="firstApp" ng-controller="mainController as main">
     <div class="jumbotron">
+      <!-- form to update the messsage variable using ng-model -->
+      <div class="form-group">
+        <label>Message</label>
+        <input type="text" class="form-control" ng-model="main.message"/>
+      </div>
       <!-- display message -->
       <h2>This is my message:</h2>
       {{main.message}}
@@ -34,7 +39,11 @@
           </tr>
         </thead>
         <tbody>
-          
+          <tr ng-repeat="computer in main.computers">
+            <td>{{ computer.name }}</td>
+            <td>{{ computer.color }}</td>
+            <td>{{ computer.nerdness }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
