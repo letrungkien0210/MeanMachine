@@ -19,7 +19,7 @@ angular.module('firstApp',[])
     //information that come from our form
     vm.computerData={};
     
-    vn.addComputer = function(){
+    vm.addComputer = function(){
       //add a computer to the list
       vm.computers.push({
         name: vm.computerData.name,
