@@ -1,0 +1,22 @@
+{
+  "name": "routing-app",
+  "version": "1.0.0",
+  "description": "git clone https://github.com/letrungkien0210/MeanMachine.git",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/letrungkien0210/MeanMachine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/letrungkien0210/MeanMachine/issues"
+  },
+  "homepage": "https://github.com/letrungkien0210/MeanMachine#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
