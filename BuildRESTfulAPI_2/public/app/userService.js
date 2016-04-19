@@ -62,15 +62,34 @@ angular.module('authService',[])
 			return $http.post('/api/authenticate/', {
 				username: username,
 				password: password
-			}).success(function(data)
-		}
-		//handle login
+			})
+			.success(function(data){
+				AuthToken.setToken(data.token);
+				return data;
+			});
+		};
 		
-		//handle logout
+		//log a user out by clearing the token
+		authFactory.logout = function(){
+			AuthToken.setToken();	
+		};
 		
 		//check if a user is logged in
+		//check if there is a local token
+		authFactory.isLoggedIn = function(){
+			if(AuthToken.getToken())
+				return true;
+			else
+				return false; 
+		};
 		
-		//get the user info
+		//get the logged in user
+		authFactory.getUser = function(){
+			if(AuthToken.getToken())
+				return $http.get('/api/me');
+			else
+				return $q.reject({message: 'User has no token.'});
+		};
 		
 		//return auth factory object
 		
@@ -103,10 +122,23 @@ angular.module('authService',[])
 	//=================================================
 	//application configuration to integrate token into requests
 	//=================================================
-	.factory('AuthInterceptor', function($q, AuthToken){
+	.factory('AuthInterceptor', function($q, $location, AuthToken){
 		
 		var interceptorFactory = {};
 		
+		//this will happen on all HTTP requests
+		interceptorFactory.request = function(config){
+			//grab the token
+			var token = AuthToken.getToken();
+			
+			//if the token exists, add it to the header as x-access-token
+			if(token)
+				config.header['x-access-token'] = token;
+			
+			return config;
+		};
+		
+		//happen
 		//attach the token to every requests
 		
 		//redirect it a token doesn't authenticate
