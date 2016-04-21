@@ -15,6 +15,16 @@ angular.module('app.routes',['ngRoute'])
 			templateUrl: 'app/views/pages/all.html',
 			controller: 'userController',
 			controllerAs: 'user'
+		})
+		.when('/users/create',{
+			templateUrl: 'app/views/pages/users/single.html',
+			controller: 'userCreateController',
+			controllerAs: 'user'
+		})
+		.when('/users/:user_id',{
+			templateUrl: 'app/views/pages/user/single.html',
+			controller: 'userEditController',
+			controllerAs: 'user'
 		});
 		
 		//get rid of the hash in the URL
