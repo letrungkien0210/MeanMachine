@@ -10,8 +10,12 @@ angular.module('mainCtrl',[])
 			vm.loggedIn = Auth.isLoggedIn();
 			
 			//get user infomation on route change
+			//Auth.getUser()
+			//	.success(function(data){
+			//		vm.user = data;
+			//	});
 			Auth.getUser()
-				.success(function(data){
+				.then(function(data){
 					vm.user = data;
 				});
 		});

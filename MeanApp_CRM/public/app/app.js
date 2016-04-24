@@ -9,5 +9,5 @@ angular.module('userApp',[
 //application configuration to integrate token into requests
 .config(function($httpProvider){
 	//attch our auth interceptor to the http requests
-	$httpProvider.interceptor.push('AuthIntercaptor');
+	$httpProvider.interceptors.push('AuthInterceptor');
 });
