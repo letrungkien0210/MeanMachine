@@ -6,6 +6,10 @@ var config = require('./config.js');
 //connect to our database (hosted on modulus.io)
 mongoose.connect(config.database);
 
+//API ROUTES
+var apiRouter = require('./app/routes/api')(app, express);
+app.use('/api', apiRouter);
+
 //START THE SERVER 
 //=========================================
 app.listen(config.port);
