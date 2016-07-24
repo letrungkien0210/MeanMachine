@@ -1,8 +1,10 @@
 angular.module('mainCtrl',[])
-.controller('mainController', function($rootScope, $location, Auth){
-    console.log("ccss");
+.controller('mainController', ['$rootScope' , '$scope' , '$location' , 'Auth' , function($rootScope, $scope, $location, Auth){
+    $scope.hello = 'cc';
 
     var vm = this;
+
+console.log('abc');
 
     //get info if a person is logged in.
     vm.loggedIn = Auth.isLoggedIn();
@@ -46,4 +48,4 @@ angular.module('mainCtrl',[])
         vm.user = {};
         $location.path('/login');
     };
-});
+}]);

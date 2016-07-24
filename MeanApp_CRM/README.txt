@@ -1,0 +1,1 @@
+config.js: Place configuration variables into this file.
