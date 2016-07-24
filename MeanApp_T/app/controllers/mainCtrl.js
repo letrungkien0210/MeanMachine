@@ -1,6 +1,6 @@
 angular.module('mainCtrl',[])
-.controller('MainController', ['$rootScope','$location','Auth', function($rootScope, $location, Auth){
-    console.log("ccss");
+.controller('mainController', ['$rootScope' , '$scope' , '$location' , 'Auth' , function($rootScope, $scope, $location, Auth){
+    $scope.hello = 'cc';
 
     var vm = this;
 

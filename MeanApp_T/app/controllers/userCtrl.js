@@ -2,7 +2,7 @@
 angular.module('userCtrl', ['userService'])
 //user controller for the main page
 //inject the User factory
-.controller('UserController', ['User', function(User){
+.controller('userController', function(User){
     var vm = this;
 
     //set a processing variable to show loading things
@@ -34,9 +34,9 @@ angular.module('userCtrl', ['userService'])
                 });
             });
     };
-}])
+})
 //controller applied to user creation page
-.controller('UserCreateController', ['User', function(User){
+.controller('userCreateController', function(User){
     var vm = this;
 
     //variable to hide/show elements of the view
@@ -60,9 +60,9 @@ angular.module('userCtrl', ['userService'])
             vm.message = data.message;
         })
     }
-}])
+})
 //controller applied to user edit page
-.controller('UserEditController', ['$routeParams','User', function($routeParams, User){
+.controller('userEditController', function($routeParams, User){
     var vm = this;
 
     //variable to hide/show element of the view
@@ -93,4 +93,4 @@ angular.module('userCtrl', ['userService'])
             vm.message = data.message;
         });
     };
-}]);
+});
