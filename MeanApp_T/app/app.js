@@ -11,4 +11,4 @@ angular.module('userApp',[
     console.log('cc');
     //attach our auth interceptor to the http requests
     $httpProvider.interceptors.push('AuthInterceptor');
-}]);
+}])
