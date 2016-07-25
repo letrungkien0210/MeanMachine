@@ -5,7 +5,7 @@ angular.module('authService', [])
     //inject $q to return promise object
     //inject AuthToken to manage tokens
     //===================================================
-    .factory('Auth', function ($http, $q, AuthToken) {
+    .factory('Auth', ['$http', '$q', 'AuthToken', function($http, $q, AuthToken) {
         //create auth factory object
         var authFactory = {};
 
@@ -38,20 +38,24 @@ angular.module('authService', [])
 
         //get the logged in user
         authFactory.getUser = function(){
-            if(AuthToken.getToken())
+            if(AuthToken.getToken()){
+                console.log('Have token');
                 return $http.get('/api/me', { cache: true });
-            else
+            }else{
+                console.log('Don\'t Have token');
                 return $q.reject({ message : 'User has no token.'});
+            }
+                
         }
 
         //return the auth factory object
         return authFactory;
-    })
+    }])
     //===================================================
     //factory for handling tokens
     //injet $window  to store token clien-side
     //===================================================
-    .factory('AuthToken', function ($window) {
+    .factory('AuthToken', ['$window', function ($window) {
         var authTokenFactory = {};
 
         //get the token out of local storage
@@ -71,11 +75,11 @@ angular.module('authService', [])
 
         return authTokenFactory;
 
-    })
+    }])
     //===================================================
     //application configuration to integrate token into requests
     //===================================================
-    .factory('AuthInterceptor', function ($q, $location, AuthToken) {
+    .factory('AuthInterceptor', ['$q', '$location', 'AuthToken', function ($q, $location, AuthToken) {
         var interceptorFactory = {};
 
         //this will happen on all HTTP requests
@@ -104,4 +108,4 @@ angular.module('authService', [])
         };
 
         return interceptorFactory;
-    });
+    }]);

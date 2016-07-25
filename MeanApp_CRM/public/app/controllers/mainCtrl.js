@@ -4,8 +4,6 @@ angular.module('mainCtrl',[])
 
     var vm = this;
 
-console.log('abc');
-
     //get info if a person is logged in.
     vm.loggedIn = Auth.isLoggedIn();
 
@@ -14,7 +12,12 @@ console.log('abc');
         vm.loggedIn = Auth.isLoggedIn();
 
         //get user information on route change
-        Auth.getUser().success(function(data){
+        // Auth.getUser().success(function(data){
+        //     vm.user = data;
+        // });
+        Auth.getUser().then(function success(data) {
+            vm.user = data;
+        }, function error(data){
             vm.user = data;
         });
     });
