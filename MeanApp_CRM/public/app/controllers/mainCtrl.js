@@ -1,6 +1,5 @@
 angular.module('mainCtrl',[])
 .controller('mainController', ['$rootScope' , '$scope' , '$location' , 'Auth' , function($rootScope, $scope, $location, Auth){
-    $scope.hello = 'cc';
 
     var vm = this;
 
@@ -31,15 +30,12 @@ angular.module('mainCtrl',[])
 
         //call the Auth.login() function
         Auth.login(vm.loginData.username, vm.loginData.password)
-        .success(function(data){
+        .then(function success(data){
             vm.processing = false;
-
-            //if a user successfully logs in, redirect to users page
-            if(data.success){
-                $location.path('/users');
-            }else{
-                vm.error = data.message;
-            }
+             $location.path('/users');
+        }, function error(data){
+            vm.processing = false;
+            vm.error = data.message;
         });
     };
 
