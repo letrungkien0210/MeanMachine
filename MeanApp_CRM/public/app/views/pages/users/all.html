@@ -25,7 +25,7 @@
     </thead>
     <tbody>
         <!-- LOOP OVER THE USERS -->
-        <tr ng-readonly="person in user.users">
+        <tr ng-repeat="person in user.users">
             <td>{{person._id}}</td>
             <td>{{person.name}}</td>
             <td>{{person.username}}</td>
