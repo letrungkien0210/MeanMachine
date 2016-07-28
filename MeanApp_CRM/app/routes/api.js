@@ -11,8 +11,7 @@ module.exports = function(app, express) {
     
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     apiRouter.post('/authenticate', function(req, res){
-        console.log(req.body.username);
-        
+        console.log(req.body.username + '------------------------');
         //find the use
         //select the password explicitly since mongoose is not returning it by default
         User.findOne({
@@ -38,7 +37,7 @@ module.exports = function(app, express) {
                     //if user is found and password is right
                     //create a token
                     var token = jwt.sign(user, superSecret, {
-                        expiresInMinutes: 1440// expires in 24 hours
+                        expiresIn : 60*60*24// expires in 24 hours
                     });
                     
                     //return the information including token as AJSON
