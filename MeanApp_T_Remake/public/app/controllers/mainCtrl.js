@@ -1,6 +1,5 @@
 angular.module('mainCtrl',[])
 .controller('mainController', ['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth){
-    console.log('cc');
     var vm = this;
 
     //get info if a person is logged info

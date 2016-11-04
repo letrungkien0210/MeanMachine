@@ -16,7 +16,7 @@ module.exports = function(app, express) {
         //select the password explicitly since mongoose is not returning it by default
         User.findOne({
             username: req.body.username
-        }).select('password').exec(function(err, user){
+        }).select('name password').exec(function(err, user){
             if(err) throw err;
             
             //no user with that username was found
@@ -34,6 +34,7 @@ module.exports = function(app, express) {
                         message: 'Authentication failed. Wrong password.'
                     });
                 }else{
+                    console.log(user)
                     //if user is found and password is right
                     //create a token
                     var token = jwt.sign(user, superSecret, {
@@ -65,7 +66,7 @@ module.exports = function(app, express) {
             //verified secret and check exp
             jwt.verify(token, superSecret, function(err, decoded){
                 if(err){
-                    return res.json({ success: false, message: 'Failed to authenticate token'});
+                    return res.status(403).send({success: false,message: 'Failed to authenticate token.'});
                 }else{
                     //if everything is good, save to request for use in other routes
                     req.decoded = decoded;
@@ -89,6 +90,10 @@ module.exports = function(app, express) {
         res.json({ message: 'hopray! welcome to our api!!!'});
     });
     
+    apiRouter.get('/me', function(req, res){
+        res.send(req.decoded);
+    });
+
     //on routes that end in /users
     apiRouter.route('/users')
         //create a user (accessed at POST http://localhost:8080/users)

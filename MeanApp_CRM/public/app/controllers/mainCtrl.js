@@ -6,7 +6,7 @@ angular.module('mainCtrl',[])
     //get info if a person is logged in.
     vm.loggedIn = Auth.isLoggedIn();
 
-    //checl to see if a user is logged in on every request
+    //check to see if a user is logged in on every request
     $rootScope.$on('$routeChangeStart', function(){
         vm.loggedIn = Auth.isLoggedIn();
 
@@ -15,7 +15,8 @@ angular.module('mainCtrl',[])
         //     vm.user = data;
         // });
         Auth.getUser().then(function success(data) {
-            vm.user = data;
+            console.log(data);
+            vm.user = data.data._doc;
         }, function error(data){
             vm.user = data;
         });
